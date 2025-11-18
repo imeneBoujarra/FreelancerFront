@@ -69,8 +69,8 @@ const LoginPage = () => {
 
       const { role } = response.data.user;
       if (role === "formateur") navigate("/formateur");
-      else if (role === "candidat") navigate("/candidat");
-      else navigate("/admin-workspace")
+      else if (role === "candidat") navigate("/dashboard-freelancer");
+      else navigate("/dashboard-client");
     } catch (error) {
       setErrorAlert(true);
       setTimeout(() => setErrorAlert(false), 2000);
@@ -85,29 +85,64 @@ const LoginPage = () => {
           <Title level={3}>{t("LoginPage.titreForm")}</Title>
 
           {successAlert && (
-            <Alert message={t("LoginPage.ConnexionReussie")} type="success" showIcon closable style={{ marginBottom: "16px" }} />
+            <Alert
+              message={t("LoginPage.ConnexionReussie")}
+              type="success"
+              showIcon
+              closable
+              style={{ marginBottom: "16px" }}
+            />
           )}
           {errorAlert && (
-            <Alert message={t("LoginPage.ConnexionErreur")} type="error" showIcon closable style={{ marginBottom: "16px" }} />
+            <Alert
+              message={t("LoginPage.ConnexionErreur")}
+              type="error"
+              showIcon
+              closable
+              style={{ marginBottom: "16px" }}
+            />
           )}
 
-          <Form form={form} layout="vertical" onFinish={onFinish} className="login-form">
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={onFinish}
+            className="login-form"
+          >
             <Form.Item
               label={t("LoginPage.adressEmail")}
               name="email"
-              help={errors.email && <div className="ant-form-item-explain">{errors.email}</div>}
+              help={
+                errors.email && (
+                  <div className="ant-form-item-explain">{errors.email}</div>
+                )
+              }
               validateStatus={errors.email ? "error" : ""}
             >
-              <Input name="email" placeholder={t("LoginPage.adressEmailPlaceholder")} value={email} onChange={handleInputChange} />
+              <Input
+                name="email"
+                placeholder={t("LoginPage.adressEmailPlaceholder")}
+                value={email}
+                onChange={handleInputChange}
+              />
             </Form.Item>
 
             <Form.Item
               label={t("LoginPage.Password")}
               name="password"
-              help={errors.password && <div className="ant-form-item-explain">{errors.password}</div>}
+              help={
+                errors.password && (
+                  <div className="ant-form-item-explain">{errors.password}</div>
+                )
+              }
               validateStatus={errors.password ? "error" : ""}
             >
-              <Input.Password name="password" placeholder="********" value={password} onChange={handleInputChange} />
+              <Input.Password
+                name="password"
+                placeholder="********"
+                value={password}
+                onChange={handleInputChange}
+              />
             </Form.Item>
 
             <Form.Item>
