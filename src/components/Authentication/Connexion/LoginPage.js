@@ -59,11 +59,14 @@ const LoginPage = () => {
         mdp: password,
       });
 
-      localStorage.setItem("nom", response.data.user.nom);
-      localStorage.setItem("email", response.data.user.email);
-      localStorage.setItem("role", response.data.user.role);
-      localStorage.setItem("token", response.data.token);
+      const { user, token } = response.data;
 
+      // Store in localStorage (frontend only)
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", user.id);
+      localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("userRole", user.role);
+      localStorage.setItem("user", JSON.stringify(user));
       setSuccessAlert(true);
       setTimeout(() => setSuccessAlert(false), 2000);
 
